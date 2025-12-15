@@ -27,9 +27,11 @@ jobs:
       # Buat bikin file
       - name: 3. Membuat surat
         run: |
-          echo "Halo! Aku Liz dari Lumiere." > surat_dari_liz.txt
-          echo "Aku bikin surat ini otomatis lho, Dibikinnya pas tanggal %DATE% jam %TIME%" >> surat_dari_liz.txt
-        shell: cmd
+          "Halo! Aku Liz dari Lumiere." | Out-File surat_dari_liz.txt
+          "Aku bikin surat ini otomatis lho," | Out-File surat_dari_liz.txt -Append
+          "Dibikinnya pas tanggal $(Get-Date -Format 'dd-MM-yyyy HH:mm:ss')" | Out-File surat_dari_liz.txt -Append
+        shell: powershell
+
 
       - name: 4. Selesai
         run: echo "Deployment Berhasil!"
